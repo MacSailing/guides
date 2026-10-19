@@ -1,0 +1,721 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ROC(M) Study Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: MacSailing brand — white page, royal-blue type and accents, Lato throughout; one reading column with a sticky section index, each lesson ending in its quiz. */
+:root {
+  --bg: #ffffff;
+  --surface: #f3f7fc;     /* faint brand-blue tint */
+  --ink: #12305a;         /* deep navy body text */
+  --muted: #5a7396;
+  --rule: #d5e1ee;
+  --brand: #00539b;       /* MacSailing royal blue */
+  --on-brand: #ffffff;
+  --accent: #00539b;
+  --accent-soft: #e2ecf8;
+  --sea: #2f74c0;
+  --sea-soft: #e9f1fb;
+  --warn: #a8550b;
+  --good: #1f7a4d;
+  --good-soft: #e1f3e9;
+  --bad: #b42318;
+  --bad-soft: #fde4e1;
+  --font-display: "Lato", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Lato", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1729; --surface: #11233c; --ink: #e6eef8; --muted: #9db3cf; --rule: #24405f;
+    --brand: #6ea8ea; --on-brand: #0a1729; --accent: #6ea8ea; --accent-soft: #15304f;
+    --sea: #8cbcf0; --sea-soft: #132c49; --warn: #f0a35e;
+    --good: #5fd39a; --good-soft: #123528; --bad: #ff8a7a; --bad-soft: #3d1a18;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1729; --surface: #11233c; --ink: #e6eef8; --muted: #9db3cf; --rule: #24405f;
+  --brand: #6ea8ea; --on-brand: #0a1729; --accent: #6ea8ea; --accent-soft: #15304f;
+  --sea: #8cbcf0; --sea-soft: #132c49; --warn: #f0a35e;
+  --good: #5fd39a; --good-soft: #123528; --bad: #ff8a7a; --bad-soft: #3d1a18;
+  color-scheme: dark;
+}
+.brandbar { border-bottom: 1px solid var(--rule); }
+.brandbar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding-block: 16px; }
+.wordmark { display: flex; align-items: flex-end; gap: 8px; color: var(--brand); text-decoration: none; }
+.wordmark svg { flex: none; }
+.wordmark span { font-style: italic; font-size: 18px; letter-spacing: 0.32em; text-transform: uppercase; line-height: 1; padding-bottom: 6px; }
+.wordmark span b { font-weight: 900; }
+.crumb { font-size: 15px; color: var(--muted); }
+.crumb b { color: var(--brand); font-weight: 400; }
+h1, h2, .lesson-head h2 { color: var(--brand); }
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
+p { margin: 0; }
+a { color: var(--sea); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Welcome */
+.hero { padding-block: 48px 32px; display: grid; gap: 20px; }
+.eyebrow { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 15px; color: var(--accent); }
+.hero h1 { font-size: clamp(36px, 7vw, 56px); font-weight: 900; letter-spacing: -0.01em; }
+.lesson-head h2 { font-weight: 900; }
+.fact { background: var(--bg); }
+.fact b { color: var(--brand); }
+.hero .lede { font-size: 19px; color: var(--ink); max-width: 62ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.fact { background: var(--surface); padding: 14px 16px; display: grid; gap: 2px; }
+.fact b { font-family: var(--font-display); font-size: 22px; font-weight: 600; }
+.fact span { font-size: 13px; color: var(--muted); }
+.prose { display: grid; gap: 14px; max-width: 65ch; }
+.prose h2 { font-size: 28px; margin-top: 8px; }
+.steps { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+
+/* Course details */
+.course { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.course-date { background: var(--brand); color: var(--on-brand); padding: 18px; display: grid; gap: 4px; align-content: start; }
+.course-date .eyebrow { color: var(--on-brand); opacity: 0.85; }
+.course-date b { font-family: var(--font-display); font-size: 26px; line-height: 1.15; font-weight: 900; }
+.course-incl { padding: 18px; display: grid; gap: 8px; align-content: start; }
+.course-incl ul { margin: 0; padding-left: 20px; display: grid; gap: 2px; }
+.course-incl li::marker { color: var(--accent); }
+.small { font-size: 13px; color: var(--muted); }
+@media (max-width: 560px) { .course { grid-template-columns: 1fr; } }
+.plan { display: grid; gap: 4px; }
+.day { display: grid; grid-template-columns: 5em 1fr; gap: 12px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+.day b { font-family: var(--font-mono); font-weight: 500; font-size: 14px; padding-top: 2px; }
+.day span { min-width: 0; }
+.course-day b { color: var(--accent); }
+
+/* Sticky index */
+.index {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule);
+}
+.index .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: thin; }
+.index a {
+  flex: none; text-decoration: none; color: var(--ink);
+  font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: 0.04em;
+  border: 1px solid var(--rule); background: var(--surface); border-radius: 999px; padding: 4px 12px;
+  display: inline-flex; gap: 6px; align-items: center;
+}
+.index a .sc { font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-weight: 400; }
+.index a.done { border-color: var(--good); }
+.index a.done .sc { color: var(--good); }
+
+/* Lessons */
+section.lesson { padding-block: 44px 8px; display: grid; gap: 18px; scroll-margin-top: 64px; }
+.lesson-head { display: grid; gap: 6px; }
+.lesson-head h2 { font-size: clamp(30px, 6vw, 40px); font-weight: 700; }
+.lesson-head .eyebrow { color: var(--sea); }
+.teach { display: grid; gap: 12px; }
+.teach ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.teach li::marker { color: var(--accent); }
+.key { background: var(--sea-soft); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
+.key h3 { font-size: 18px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sea); }
+.script {
+  font-family: var(--font-mono); font-size: 14px; line-height: 1.7;
+  background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 14px; overflow-x: auto; white-space: pre-wrap;
+}
+.script .lbl { display: block; font-family: var(--font-display); font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; color: var(--muted); }
+td:first-child { font-family: var(--font-mono); font-weight: 500; white-space: nowrap; }
+
+.ladder { display: grid; gap: 4px; }
+.rung { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; padding: 8px 12px; border-radius: 6px; background: var(--surface); border: 1px solid var(--rule); }
+.rung b { font-family: var(--font-mono); }
+.rung:nth-child(1) b { color: var(--bad); }
+.rung:nth-child(2) b { color: var(--warn); }
+.rung:nth-child(3) b { color: var(--sea); }
+@media (max-width: 480px) { .rung { grid-template-columns: 1fr; gap: 0; } }
+
+/* Quiz */
+.quiz { display: grid; gap: 14px; margin-top: 8px; }
+.quiz-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; border-top: 2px solid var(--brand); padding-top: 12px; }
+.quiz-bar h3 { font-size: 22px; }
+.score { font-family: var(--font-mono); font-size: 14px; color: var(--muted); }
+.btn {
+  font: 500 14px var(--font-body); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 6px; padding: 6px 12px; cursor: pointer;
+}
+.btn:hover { border-color: var(--sea); }
+.btn.primary { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.q { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; display: grid; gap: 10px; }
+.q-text { font-weight: 600; display: flex; gap: 10px; }
+.q-num { font-family: var(--font-mono); color: var(--muted); font-weight: 400; flex: none; }
+.opts { display: grid; gap: 6px; }
+.opt {
+  text-align: left; font: 400 15px/1.45 var(--font-body); color: var(--ink);
+  background: transparent; border: 1px solid var(--rule); border-radius: 6px;
+  padding: 8px 12px; cursor: pointer; display: flex; gap: 10px; align-items: baseline;
+}
+.opt .l { font-family: var(--font-mono); font-size: 13px; color: var(--muted); flex: none; }
+.opt:hover:not(:disabled) { border-color: var(--sea); background: var(--sea-soft); }
+.opt:disabled { cursor: default; }
+.opt.right { border-color: var(--good); background: var(--good-soft); }
+.opt.right .l { color: var(--good); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.wrong .l { color: var(--bad); }
+.why { font-size: 14px; color: var(--muted); border-left: 3px solid var(--good); padding-left: 10px; }
+.why.miss { border-left-color: var(--bad); }
+.why strong { color: var(--ink); }
+
+/* Phonetic */
+.alpha { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.cell { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; display: grid; grid-template-columns: 1.6em 1fr; align-items: center; gap: 8px; }
+.cell .letter { font-family: var(--font-display); font-weight: 700; font-size: 26px; text-align: center; }
+.cell input {
+  width: 100%; min-width: 0; font: 400 15px var(--font-body); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--rule); border-radius: 4px; padding: 5px 7px;
+}
+.cell.ok { border-color: var(--good); background: var(--good-soft); }
+.cell.no { border-color: var(--bad); background: var(--bad-soft); }
+.cell .ans { grid-column: 2; font-size: 13px; color: var(--bad); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.numbers { display: flex; flex-wrap: wrap; gap: 6px; }
+.numbers span { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 4px 10px; font-size: 14px; }
+.numbers b { font-family: var(--font-mono); margin-right: 6px; }
+
+footer { padding-block: 48px 64px; color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="brandbar">
+  <div class="wrap">
+    <div class="wordmark" aria-label="MacSailing">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M30 2 C25 14 16 26 3 35 L30 35 C27 24 27 12 30 2 Z" fill="currentColor"/><path d="M2 38 C14 34 26 36 38 39" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+      <span><b>Mac</b>Sailing</span>
+    </div>
+    <div class="crumb">Courses &gt; <b>Maritime Radio Course</b></div>
+  </div>
+</div>
+
+<header class="wrap hero">
+  <div class="eyebrow">MacSailing · Maritime Radio Course</div>
+  <h1>Welcome aboard the radio course.</h1>
+  <p class="lede">This guide gets you ready for the Restricted Operator Certificate (Maritime), the ROC(M). Each lesson is short. Read it, then answer the review questions from your course package right underneath. You'll see straight away whether you were right and why.</p>
+  <div class="facts">
+    <div class="fact"><b>ROC(M)</b><span>Canada's licence to operate a marine VHF radio</span></div>
+    <div class="fact"><b>Life</b><span>How long the certificate is valid</span></div>
+    <div class="fact"><b class="mono">Ch 16</b><span>Distress, safety and calling</span></div>
+    <div class="fact"><b class="mono">Ch 70</b><span>Digital Selective Calling only</span></div>
+  </div>
+  <div class="course">
+    <div class="course-date">
+      <span class="eyebrow">How the course runs</span>
+      <b>Pre-study, then a 4-hour review and the exam</b>
+    </div>
+    <div class="course-incl">
+      <p><b>What's included</b></p>
+      <ul>
+        <li>Course manual and exam application form</li>
+        <li>4-hour review session, in person</li>
+        <li>Official ROC(M) exam and certification processing</li>
+      </ul>
+      <p class="small">Developed by the Canadian Power and Sail Squadrons in partnership with Sail Canada.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap prose">
+  <h2>What this course is</h2>
+  <p>Anyone who transmits on a marine VHF radio in Canada needs an ROC(M). Innovation, Science and Economic Development Canada (ISED) issues it. Most recreational boaters earn it through a course like this one and a short exam with an accredited examiner. Learning the DSC (Digital Selective Calling) material earns the DSC endorsement, which you need to use the digital features of a modern radio.</p>
+  <p>The course covers three things. First, the rules that come with the radio. Second, how to talk on it so you're understood on a busy channel. Third, what to do when things go wrong: the Distress, Urgency and Safety calls that could save your boat or someone else's.</p>
+  <h2>How to use this guide</h2>
+  <ol class="steps">
+    <li>Start with the phonetic alphabet. Every other lesson leans on it.</li>
+    <li>Read each lesson's short notes before trying its questions.</li>
+    <li>Pick an answer. Green means right; red shows you the correct one and the reason.</li>
+    <li>Use <em>Retry</em> on any section until you score it cleanly. Your scores stay in this browser.</li>
+  </ol>
+  <div class="key">
+    <h3>Before class</h3>
+    <p>Use this prep guide to get familiar with the material. Don't worry if you don't have time to finish it all. We'll review everything in class before the exam.</p>
+  </div>
+</div>
+
+<nav class="index" aria-label="Lessons">
+  <div class="wrap" id="index"></div>
+</nav>
+
+<main class="wrap" id="lessons">
+  <section class="lesson" id="alphabet">
+    <div class="lesson-head">
+      <div class="eyebrow">Warm-up</div>
+      <h2>The phonetic alphabet</h2>
+    </div>
+    <div class="teach">
+      <p>Radio audio is noisy, and "B", "D", "E" and "P" all sound alike through static. So we spell with words. Use these whenever you spell your boat name, a call sign or a place.</p>
+      <p>Numbers get a radio pronunciation too, so they don't blur together:</p>
+      <div class="numbers">
+        <span><b>0</b>Zero</span><span><b>1</b>Wun</span><span><b>2</b>Too</span><span><b>3</b>Tree</span><span><b>4</b>Fow-er</span>
+        <span><b>5</b>Fife</span><span><b>6</b>Six</span><span><b>7</b>Sev-en</span><span><b>8</b>Ait</span><span><b>9</b>Nin-er</span>
+      </div>
+      <div class="key"><h3>Practice</h3><p>Type the word for each letter, then press <em>Check</em>. Spelling isn't strict: "Alpha" and "Alfa", "Juliet" and "Juliett", "Xray" and "X-ray" all count.</p></div>
+    </div>
+    <div class="alpha" id="alpha"></div>
+    <div class="row">
+      <button class="btn primary" id="alpha-check" type="button">Check</button>
+      <button class="btn" id="alpha-reveal" type="button">Show all</button>
+      <button class="btn" id="alpha-clear" type="button">Clear</button>
+      <span class="score" id="alpha-score"></span>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>MacSailing · Maritime Radio Course prep guide. Questions about the course? Ask us in class or contact the MacSailing office.</p>
+</footer>
+
+<script>
+const LESSONS = [
+{
+  id: "s1", short: "1 · Services", title: "Maritime mobile services",
+  teach: `
+  <p>This lesson covers the rules that come with having a radio on board.</p>
+  <ul>
+    <li><b>Your certificate.</b> You need an ROC(M) to <em>operate</em> a marine radio, and operating means <em>transmitting</em>. Listening doesn't count. Age, citizenship and boat ownership don't matter. The certificate is valid for life. Keep it, or a copy, <b>with you</b> whenever you operate.</li>
+    <li><b>Station licence.</b> Pleasure craft in Canadian and US waters usually don't need one. If one has been issued, it must be <b>carried on board</b>. Equipment must be approved by ISED's Spectrum Management branch.</li>
+    <li><b>Range and power.</b> VHF works by line of sight, so expect about <b>20 NM</b> reliably. Maximum power is <b>25 W</b>. Switch to <b>1 W</b> for a nearby boat or marina so you don't swamp everyone else.</li>
+    <li><b>Channel 16</b> (156.800 MHz) is for distress, safety and calling. A non-DSC Mayday goes here.</li>
+    <li><b>Secrecy of communications.</b> Don't repeat or use what you overhear. The exceptions are Distress, Urgency, Safety and "all stations" calls.</li>
+    <li><b>Handhelds</b> are for when a fixed radio is impractical. They aren't a substitute for a fixed set where one fits.</li>
+    <li><b>Radio logs</b> are required only on <b>compulsorily fitted</b> vessels, such as commercial ships required by law to carry a radio.</li>
+    <li><b>Penalties</b> are handled under the federal <b>Contraventions Act</b> in most provinces and territories, which allows ticketing.</li>
+  </ul>`,
+  qs: [
+    ["Your ROC(M) or a copy must be:", ["Posted in a conspicuous area near the transmitter","With you when operating a radio","On file with the boat's owner","Filed with the Coast Guard"], 1, "The certificate belongs to the person, not the boat, so it travels with you."],
+    ["The VHF band provides a reliable communications range up to approximately:", ["20 NM","75 NM","5 NM","50 NM"], 0, "VHF is line of sight. Antenna height matters, but about 20 NM is the reliable figure."],
+    ["The maximum power of VHF radio is restricted to:", ["5 watts","1 watt","10 watts","25 watts"], 3, "25 W is the high-power setting. 1 W is the low setting."],
+    ["If applying for a maritime mobile radio station licence, what Canadian agency must approve your radio equipment?", ["Industry, Science and Economic Development Canada - Spectrum Management Branch (ISEDC-SM)","Transport Canada - Vessel Licensing and Registration","Canadian Coast Guard - Search and Rescue","Canadian Radio Telecommunication Commission (CRTC)"], 0, "ISED manages the radio spectrum and certifies equipment."],
+    ["What constitutes “operating” a maritime band radio?", ["Transmitting on Channel 16","Turning on the radio","Listening to the weather channel","Receiving a message"], 0, "Operating means transmitting. Anyone may listen."],
+    ["ROC(M)'s are valid for:", ["Two years","Five years","Life","One year"], 2, "There's no renewal."],
+    ["In most Canadian Provinces and Territories, which Federal act governs the penalties for violations of the regulations of Canada, with regard to Maritime Radio?", ["Contraventions Act","Canada Shipping Act","Criminal Code of Canada","Collision Regulations"], 0, "The Contraventions Act lets officers ticket regulatory offences."],
+    ["If a radio station licence has been issued, it shall be:", ["Registered with the Canadian Coast Guard","Filed with the insurance company","Filed with the ship's owner","Carried onboard"], 3, "The station licence belongs to the boat's radio, so it stays aboard."],
+    ["Secrecy of Communications applies:", ["Unless you have a Restricted Operator's Certificate","At all times","Except to members of your crew","Except in distress, urgency, safety and 'all station' calls"], 3, "Those four call types are meant to be heard and acted on by everyone."],
+    ["When should a handheld VHF radio be carried on board a vessel?", ["When a fixed VHF radio installation is impractical","As a substitute for a fixed VHF radio","To ensure a vessel is compliant with the Radio Communications Act","As stipulated on an ROC(M)"], 0, "Handhelds have less power and a lower antenna. Use one when a fixed set can't be installed."],
+    ["To operate a Maritime VHF radiotelephone you must:", ["Own a boat","Be 16 or more years of age","Have a Restricted Operator's Certificate (Maritime) (ROC(M))","Be a Canadian citizen"], 2, "The certificate is the only requirement listed here."],
+    ["When contacting a nearby boat or marina, your radio should be set to:", ["10 watts","5 watts","1 watt","25 watt"], 2, "Use the lowest power that works. 1 W is the low setting."],
+    ["To make a Distress Call on a VHF radio not equipped with Digital Selective Calling (DSC), you use:", ["158.600 MHz","156.400 MHz","Channel 15","Channel 16"], 3, "Channel 16 is 156.800 MHz. The frequencies offered here are distractors."],
+    ["Radio logs must be kept by:", ["All vessels that are foreign going","All vessels","Compulsorily fitted vessels","All vessels with VHF"], 2, "Pleasure craft carry radios voluntarily and don't need a log."]
+  ]
+},
+{
+  id: "s2", short: "2 · Procedures", title: "Procedures and plain radio talk",
+  teach: `
+  <p>Only one person can talk at a time, so radio has fixed words that do the work of a conversation.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Proword</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>ROGER</td><td>Message received and understood</td></tr>
+      <tr><td>AFFIRMATIVE</td><td>Yes, or permission granted</td></tr>
+      <tr><td>NEGATIVE</td><td>No, or permission not granted</td></tr>
+      <tr><td>OVER</td><td>My transmission is ended and I expect a response from you</td></tr>
+      <tr><td>OUT</td><td>This conversation is ended. No response expected</td></tr>
+      <tr><td>STAND BY</td><td>I must pause for a few seconds or minutes, please wait</td></tr>
+      <tr><td>GO AHEAD</td><td>Proceed with your message</td></tr>
+      <tr><td>BREAK</td><td>A separation between portions of a message</td></tr>
+      <tr><td>SAY AGAIN</td><td>Repeat your last transmission</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>Don't say <b>"OK"</b>. It's vague, so use ROGER or AFFIRMATIVE.</li>
+    <li><b>Times</b> use the 24-hour clock, spoken digit by digit: 12:45 AM is "zero zero four five".</li>
+    <li>A <b>date-time group</b> is six digits, DDHHMM. 10:15 PM local on the 20th is <span class="mono">202215</span>. A <b>Z</b> suffix means UTC, so leave it off for local time.</li>
+    <li><b>Money</b> starts with the unit: $12.34 is "dollars one two decimal three four".</li>
+    <li>In Canadian waters, set your radio to the <b>Canada</b> channel group.</li>
+    <li>Between two ships, the <b>called station controls</b> the conversation.</li>
+    <li>Your <b>station identifier</b> can be your call sign, your boat name or your own name.</li>
+    <li>Ask the Coast Guard for a <b>radio check</b> on a working channel, never on 16.</li>
+    <li><b>Profanity</b> is strictly prohibited and can cost up to $5,000 plus a year in jail. A <b>false distress</b> call is punishable by a fine and jail.</li>
+  </ul>`,
+  qs: [
+    ["Use of profane or obscene language:", ["Is strictly prohibited","Is frowned upon","Is not permitted but is not punishable","Will be allowed if under stress"], 0, "Prohibited, and punishable."],
+    ["AFFIRMATIVE means:", ["Your message is received","Please confirm","You may continue to send","Yes or permission granted"], 3, "\"Message received\" is ROGER. AFFIRMATIVE is \"yes\"."],
+    ["What does GO AHEAD mean?", ["Proceed with your message","Show me the way","You may pass me","I will follow your boat"], 0, "Prowords are about the conversation, not navigation."],
+    ["When calling the Coast Guard for a radio check you should use a working channel.", ["True","False"], 0, "Keep Channel 16 clear for calling and emergencies."],
+    ["What is the correct way to express noon on the 16th day of the month EST?", ["120016","161200E","161200Z","161200"], 3, "DDHHMM: day 16, time 1200. EST is local time, so there's no zone letter. Z would mean UTC."],
+    ["The penalty for use of profane or obscene language on a recreational vessel could be as much as:", ["$5000 and costs and a year in jail","As much as the judge chooses","$10000 costs and a year in jail","Forfeiture of your boat"], 0, "The individual maximum is $5,000 and up to a year in jail."],
+    ["Between two ship stations, the station being called is the controlling station.", ["True","False"], 0, "The called station controls. It can pick the working channel and end the exchange."],
+    ["Your vessel's identifier is used when calling other vessels. It may be:", ["Your name","The call sign issued with your radio station licence","Your boat name","Any of the above"], 3, "Without a licence and call sign, a boat name or your name is acceptable."],
+    ["When operating your radio in Canada, which channel group should you use?", ["International","United States","Canada","None of the above"], 2, "Some channels are simplex in one group and duplex in another, so the setting matters."],
+    ["Express 10:15 PM local time on Jan 20.", ["201015Z","201015","202215Z","202215"], 3, "Day 20, 22:15, local time, so no Z."],
+    ["STAND BY means:", ["Help will be needed, stay available","Keep this frequency clear","I must pause for a few seconds or minutes, please wait","Do not transmit until I have finished"], 2, "A short pause, for example while you grab the chart."],
+    ["OVER means:", ["My transmission is complete, I am signing off","This is the end of my transmission","This message is complete, another is about to be sent","My transmission is ended, I expect a response from you"], 3, "Signing off is OUT. Never say \"over and out\"."],
+    ["Transmit 12:45 AM as:", ["One two four five","Twelve forty-five am","Zero zero four five","Twelve decimal 45"], 2, "12:45 AM is 0045 on a 24-hour clock. Say each digit."],
+    ["False distress signals are:", ["Going to cost you your certificate","Punishable by a fine","Punishable by jail","Punishable by a fine and jail"], 3, "Both. A false Mayday sends real rescuers out."],
+    ["Which of the following should not be used in Maritime VHF transmissions as a key expression?", ["OK","That is correct","Verify","Negative"], 0, "\"OK\" can mean many things. Use a proword."],
+    ["You would transmit $12.34 as:", ["Twelve dollars thirty-four cents","Dollars one two decimal three four","One two decimal three four dollars","One two dollars three four cents"], 1, "Unit first, then the digits one by one."],
+    ["What does BREAK indicate?", ["Station going off the air temporarily","I wish to join your conversation","A separation between portions of a message","End of a transmission"], 2, "Separates parts of a long message, such as the address and the text."],
+    ["ROGER means:", ["Message received and understood","It is your turn to transmit","Do you agree?","Yes or permission granted"], 0, "ROGER only confirms you heard. It doesn't mean yes."]
+  ]
+},
+{
+  id: "s3", short: "3 · GMDSS", title: "The Global Maritime Distress and Safety System",
+  teach: `
+  <p><b>GMDSS</b> is the worldwide system that lets ships call for help automatically, with their position attached, by more than one method.</p>
+  <ul>
+    <li>It applies <b>world-wide</b>. It's mandatory for compulsorily equipped commercial ships, which must reach shore by at least two methods. For <b>pleasure craft it's voluntary</b>, but a DSC radio puts you in the system.</li>
+    <li>There are four <b>sea areas, A1 to A4</b>. <b>A1</b> means you're within range of a shore-based VHF-DSC Coast Guard Radio station. A2 to A4 reach further out, using MF, satellites and HF.</li>
+    <li>The Coast Guard <b>still monitors Channel 16 and 2182 kHz</b> for the foreseeable future.</li>
+    <li>An <b>MMSI</b> (Maritime Mobile Service Identity) is a nine-digit number, a phone number for your radio. You get it <b>free from ISED</b>, and it <b>must be programmed into the radio</b>, since it doesn't come from the factory.</li>
+    <li>The first three non-zero digits are the <b>country code</b> (Canada is 316). A leading zero means a <b>fleet/group</b> number, and two leading zeros mean a <b>shore station</b>.</li>
+    <li>A GPS connected to the radio provides <b>automatic position information</b> in your alerts.</li>
+  </ul>`,
+  qs: [
+    ["GPS connected to your radio provides:", ["Your position, provided you have LORAN on board","Position information that is no more than 4 hours old","Automatic position information","Extended range for communications"], 2, "The radio reads your position from the GPS and sends it with DSC calls."],
+    ["An MMSI number is:", ["A number you obtain from Innovation, Science and Economic Development Canada (IC)","A number issued by the Coast Guard","A nine digit number you must verbally state when transmitting DSC calls","A number that can be added to any VHF radio to enable you to receive Distress Calls on Channel 70"], 0, "ISED issues it. You don't need to speak it on DSC calls, because the radio sends it digitally."],
+    ["The four sea areas are called:", ["Shore, offshore, oceanic and arctic","Areas 1 to 4","SA 1 to 4","Sea areas A1 to A4"], 3, ""],
+    ["Routine DSC calls do not need to involve:", ["Channel 16","The called station's MMSI number","Channel 70","Your MMSI number"], 0, "A DSC call goes out on 70 using both MMSIs. Then you talk on a working channel, so 16 isn't involved."],
+    ["MMSI numbers with leading zeros indicate that the number is:", ["From a station with a valid station license","From a foreign country","A fleet or a Shore Station MMSI","No longer valid"], 2, "One zero means a group. Two zeros mean a coast station."],
+    ["The letters GMDSS stand for:", ["Global Maritime Distress and Safety System","General Maritime Digital Safety System","Global Marine Digital Security System","General Marine Digital Safety System"], 0, ""],
+    ["Sea Area A1 means you are:", ["Within 30 NM of shore","Beyond the range of any shore-based stations","Within 100 NM of shore","In range of a shore-based VHF-DSC CGR station"], 3, "Sea areas are defined by coverage, not a fixed distance."],
+    ["GMDSS:", ["Applies in North and South America","Applies in Canada and the US","Applies in Canada only","Applies world-wide"], 3, "It's an International Maritime Organization system."],
+    ["The Coast Guard will:", ["Continue to monitor Channel 16 and MF 2182 KHz for the foreseeable future","Monitor Channel 16 until 2020, then cease monitoring that channel","Listen only for digital data on Channel 16 or Channel 70","Cease to monitor Channel 16"], 0, "Many boats still have no DSC, so voice watch continues."],
+    ["In an MMSI number the first three digits that are not zeros are used to identify:", ["The area where you boat","That it is a Coast Guard station","That it is a fleet number","The country of origin"], 3, "This is the Maritime Identification Digits. Canada's are 316."],
+    ["An MMSI number:", ["Must be programmed into the radio","Must be obtained within 10 days of first use of the radio","Must be quoted verbally on each call","Is already programmed into the radio at the factory"], 0, "Until it's programmed, the DSC features won't work."],
+    ["Which of the following is true of GMDSS equipment?", ["It is voluntary for pleasure craft","It is mandatory for pleasure craft carrying more than 6 persons on board","It is mandatory for any commercial craft that carries passengers","It is mandatory on pleasure craft over 8 metres long"], 0, ""],
+    ["The purpose of the GMDSS is to:", ["Connect all boats to phone lines","Oversee communications between all boats and planes","Automatically link all boats to satellites","Enable mandatorily equipped commercial vessels to communicate with shore stations by at least 2 methods"], 3, "Redundancy: if one method fails, there's another."],
+    ["A unique MMSI number is provided:", ["By Innovation, Science and Economic Development Canada (IC) free of charge","Upon proof that you have a ROC(M)","Upon payment of a licensing fee","To each individual operator"], 0, "It's free, and it's issued per vessel, not per operator."],
+    ["A pleasure craft MUST be fitted with DSC/GMDSS equipment if it is:", ["On the open sea","Carrying more than 12 passengers","On an international voyage and has more than 6 passengers","Pleasure craft are not obliged to have GMDSS equipment"], 3, "It's voluntary for pleasure craft, though strongly recommended."]
+  ]
+},
+{
+  id: "s4", short: "4 · DSC radios", title: "Digital Selective Calling radios",
+  teach: `
+  <p>A DSC radio sends a short digital burst on <b>Channel 70</b>: who you are (your MMSI), who you're calling, what kind of call it is and, in a distress, where you are.</p>
+  <ul>
+    <li><b>Channel 70 is digital only.</b> Never talk on it, and your radio won't let you. Distress Alerts go out on 70 automatically.</li>
+    <li><b>Class D</b> is the minimum standard for a recreational VHF-DSC radio. It's the primary GMDSS tool for recreational boaters.</li>
+    <li>The <b>Distress button</b> is recessed or covered so it can't be pressed by accident. You hold it for several seconds to send.</li>
+    <li>With GPS connected, your position <b>goes out automatically</b> with a Distress Alert. Without GPS, <b>enter your position manually</b> and update it at least every four hours.</li>
+    <li><b>Never test with the distress button.</b> Test DSC by making a routine DSC call to another station, or use the radio's test-call feature.</li>
+    <li>Range is still VHF: <b>line of sight</b>.</li>
+  </ul>`,
+  qs: [
+    ["Position information from an interfaced GPS:", ["Must be manually entered","Is sent once a Distress Call has been answered","Is repeatedly sent every minute if you have issued a Distress Call","Is automatically sent with a Distress Signal"], 3, "That's the main reason to wire up a GPS."],
+    ["Channel 70 is used for:", ["Receiving weather updates","Digital Selective Calling","Voice communication between vessels","Contacting a marina"], 1, ""],
+    ["The correct way to test the distress function on a class D radio is to:", ["Transmit a voice call to your own MMSI number","Depress the distress button for 3-5 seconds","Make a routine DSC call to another station","Transmit an emergency signal using DSC"], 2, "Holding the button sends a real alert. A routine DSC call proves the DSC side works."],
+    ["Lacking an internal or interfaced GPS, the operator must:", ["Announce that positional information is not available during priority calls","Manually enter the boat's position at least every four hours","Verbally give a position report during any priority call","Enter the position immediately before making a Distress Call"], 1, "Then any alert you send carries a reasonably recent position. In a real emergency, also say your position by voice."],
+    ["You may use your DSC maritime radio for:", ["Locating your position if you do not have a GPS","Establishing a land-based station","Transmitting Distress Alerts on Channel 70","Superfluous transmissions"], 2, "A radio can't work out its own position. It needs a GPS."],
+    ["The range of a VHF-DSC radio is limited to:", ["Line of sight","World-wide","About 200 NM from a shore station","About 100 NM"], 0, "Digital calling doesn't extend VHF range."],
+    ["The Distress button:", ["Lights up and flashes if a Distress Call is received","Is only found on DSC radios","Maybe red or yellow and must protrude so as to be easily pressed","Must be recessed so it will not be accidently pressed"], 3, "Protection against false alerts."],
+    ["The primary component of the GMDSS for recreational boaters is:", ["Navtex","EPIRB","VHF-DSC radio","MF-SSB"], 2, "An EPIRB is valuable but only one-way. The VHF-DSC radio is the core tool."],
+    ["Channel 70:", ["Is for digital use (DSC) only and must not be used for voice communication","May be used for Distress Calls only","Is for use by anyone using VHF","Should be monitored by all users of VHF radio – DSC equipped or not"], 0, "Your DSC radio watches 70 for you automatically."],
+    ["What class of VHF-DSC Radio meets the minimum requirements?", ["SC-1-01","Class A","Class B","Class D"], 3, "Class A and B are for larger, compulsorily fitted ships."]
+  ]
+},
+{
+  id: "s5", short: "5 · Routine", title: "Routine communication",
+  teach: `
+  <p>Most of your radio use will be routine: hailing a friend, calling a marina, checking with Coast Guard Radio.</p>
+  <ul>
+    <li><b>Listen first</b> to make sure the channel is clear.</li>
+    <li>Say the called station's name <b>up to 3 times</b>, then yours the <b>same number of times</b>. That's <b>balanced calling</b>.</li>
+    <li>Say the other station first and yourself second. Putting your own name first is <b>reverse calling</b>, so avoid it.</li>
+    <li>The <b>called station controls</b> the exchange. Both stations sign off with their identifier.</li>
+    <li>For Coast Guard Radio (MCTS), use the <b>Coast Guard working channel for your area</b>, which is listed in the Radio Aids to Marine Navigation.</li>
+    <li>If you didn't catch who called you, answer "Station calling Moondrift, this is Moondrift, say again."</li>
+  </ul>
+  <div class="script"><span class="lbl">Voice call</span>Windsong, Windsong, Windsong
+this is Moondrift, Moondrift, Moondrift
+Channel 68, over</div>
+  <div class="key"><h3>Routine DSC call</h3>
+    <p>You need the other boat's <b>MMSI</b>, which you can save in your radio's <b>Directory</b>. The <b>caller picks the working channel</b> and it's sent with the call. The other radio <b>sounds an alert</b>, both radios switch to that channel and you talk there. DSC can also <b>request another vessel's position</b>. After a <b>group call</b>, members reply on the selected working channel.</p>
+  </div>`,
+  qs: [
+    ["To have balanced calling, how many times should you state the call sign of your vessel?", ["Fewer times than the station being called was stated","More times that the station being called was stated","The same number of times that the station being called was stated","Three times"], 2, "Two and two, or three and three."],
+    ["Which of the following is an example of how to begin a call in response to a voice call when you do not hear the caller's identification ?", ["Caller say again ...","Moondrift calling unknown station","Station calling Moondrift...","This is Moondrift say again..."], 2, "In full: \"Station calling Moondrift, this is Moondrift, say again.\""],
+    ["The recipients of a DSC group call:", ["must always respond on VHF Channel 70","wait for the second DSC group call that has the message or information","may respond on the selected working channel","should switch to channel 16 and acknowledge the call"], 2, "The group call carries a working channel, so that's where you reply."],
+    ["Can DSC be used to acquire another vessel's position?", ["Yes it is a feature available on DSC","Only if a voice call is made in addition to a DSC request","No, this can only be done on VHF channel 16","Yes but only after a routine call is completed"], 0, "Position request. Many radios let the other boat accept automatically."],
+    ["When the communication is finished both stations must sign off with their Station Identifier.", ["True","False"], 0, "For example, \"Moondrift, out.\""],
+    ["Which station is the controlling station between two vessels?", ["The vessel being called","The vessel calling"], 0, ""],
+    ["How is the desired working channel determined in a routine call using DSC?", ["The desired working channel is always Channel 06","The desired working channel is selected automatically by the DSC radio","The desired working channel is set with the digital call by the station originating the call","The desired working channel is selected by the station receiving the DSC call"], 2, "You choose it when you set up the call."],
+    ["Reverse calling is when you state your call sign before the call sign of the station you are calling.", ["True","False"], 0, "That's the definition, and it's the wrong order."],
+    ["Before transmitting on a frequency, you should:", ["Send a transmission asking if the channel is being used","Check with the Coast Guard and get permission","Listen to make sure the channel is clear","Monitor it for a minimum of two minutes"], 2, ""],
+    ["When calling a Coast Guard radio station, which channel should be used?", ["Channel 70","Channel 16","Channel 06","A Coast Guard working channel for the area where you are located"], 3, "Keeps routine traffic off 16. In an emergency, use 16."],
+    ["The ‘Directory’ is used to", ["Store GPS waypoint information for safe travel","Indicate the time, position and other information about DSC Distress Calls received","Keep a record of all received priority calls","Store names and MMSI numbers of friends and others such as Coast Guard Stations"], 3, "It's your radio's contact list."],
+    ["In order to make a routine call using the DSC functions of your radio you must know:", ["The call sign of the station you are calling","The name of the owner of the vessel you are calling","The home port of the vessel you are calling","The MMSI number of the station you are calling"], 3, "DSC addresses by MMSI."],
+    ["How do you know that another station has called you using a DSC radio?", ["The radio screen light will go dark","You must look at the screen on your radio","The radio will sound an audible alert","The other station will call you on Channel 16 and let you know"], 2, ""],
+    ["What is the maximum number of times you should state the call sign of the vessel being called?", ["5 times","3 times","2 times","4 times"], 1, ""]
+  ]
+},
+{
+  id: "s6", short: "6 · Distress", title: "Distress: MAYDAY",
+  teach: `
+  <p>Use Mayday only for <b>grave and imminent danger</b> to a vessel or a person, such as sinking, fire or someone overboard. Everything else waits.</p>
+  <div class="ladder">
+    <div class="rung"><b>MAYDAY</b><span>Distress. Grave and imminent danger. Top priority</span></div>
+    <div class="rung"><b>PAN PAN</b><span>Urgency. Safety of a ship or person, not imminent</span></div>
+    <div class="rung"><b>SÉCURITÉ</b><span>Safety. Navigation or weather warnings</span></div>
+    <div class="rung"><b>Routine</b><span>Everything else</span></div>
+  </div>
+  <p>With a DSC radio, lift the cover and hold the Distress button. Then send the voice call on <b>Channel 16</b>, with the call and message together.</p>
+  <div class="script"><span class="lbl">Distress call and message</span>MAYDAY MAYDAY MAYDAY
+this is Moondrift, Moondrift, Moondrift   (call sign, MMSI)
+MAYDAY Moondrift
+Position: 2 miles south of Entrance Island, off Nanaimo
+Nature: taking on water, sinking
+Assistance: need immediate help
+Persons on board: 4
+Other: 10-metre white sloop, abandoning to liferaft
+over</div>
+  <ul>
+    <li>The <b>vessel in distress controls</b> the traffic unless it hands control to another station, usually the Coast Guard.</li>
+    <li>To stop interference, the controlling station says <b>SEELONCE MAYDAY</b>. When it's over: <b>SEELONCE FEENEE</b>.</li>
+    <li>If you <b>hear</b> a Mayday: <b>listen first</b> to see whether the Coast Guard acknowledges. If no one does, acknowledge with <b>"RECEIVED MAYDAY"</b>. If you need to pass it on, use <b>"MAYDAY RELAY"</b>.</li>
+    <li>If you go to help, <b>tell the Coast Guard what you're doing</b>.</li>
+    <li>You may only interrupt another transmission with a <b>higher-priority</b> one.</li>
+  </ul>`,
+  qs: [
+    ["How often is the word Mayday stated at the beginning of a Distress Call?", ["Three times","Once","As often as you think appropriate","Over and over until you get a response"], 0, ""],
+    ["The VHF Distress Calling channel is:", ["Channel 06","Channel 15","Channel 16","Channel 70"], 2, "70 carries the digital alert. The voice call goes on 16."],
+    ["The spoken Distress keyword word is:", ["Security","Securité","Mayday","Pan Pan"], 2, ""],
+    ["You prevent interference to distress traffic by:", ["Sending a Seelonce Mayday every two minutes","Sending a Seelonce Mayday every 5 minutes","Sending a Seelonce Mayday during breaks in traffic","Imposing silence on other stations if warranted"], 3, "Only when needed, and not on a timer."],
+    ["When you are the vessel in distress you caution other vessels that you have a Mayday in progress by issuing a call saying:", ["Clear this frequency","Seelonce Mayday","Mayday in progress","Emergency in progress"], 1, "From the French silence, said \"see-lonce\"."],
+    ["The first thing a station should do upon receiving a Distress Alert or Call is:", ["Contact the distress vessel and acknowledge the call","Contact the Coast Guard and advise them of the call","Listen and determine if the Coast Guard acknowledges the call","Relay the Distress Call so that the Coast Guard and other vessels are made aware of the call"], 2, "Jumping in can block the Coast Guard's reply."],
+    ["When the distress situation is finished the distress must be cancelled by the vessel in distress, the rescue vessel or the controlling station using the words:", ["Radio silence no longer required","Distress over","Seelonce Feenee","Mayday finished"], 2, "From the French silence fini."],
+    ["You may interrupt a transmission if:", ["You are anxious to send your message","Your communication is of a higher priority","You have a larger boat than the others","You're of higher rank that the person currently sending"], 1, ""],
+    ["It is proper to include the Distress Message with the call:", ["If you are in imminent danger","If you see someone doing something that could be dangerous.","When testing your radio encase it will be needed for an emergency.","If you think something might be dangerous."], 0, "In a real distress, time matters, so send everything at once."],
+    ["Distress means:", ["A crewmember is very concerned","An urgent message is to be transmitted","Grave and imminent danger to a ship or a person","Help is desired but not absolutely essential"], 2, ""],
+    ["Unless delegated to another station, which station is the controlling station in a distress situation?", ["The Coast Guard shore station","The vessel in distress","The vessel acknowledging the Mayday","The nearest vessel to the vessel in distress"], 1, ""],
+    ["A station relaying a Distress Signal says:", ["Am passing a Mayday message","Mayday relay","Distress relay","Relay Mayday"], 1, "Said three times: \"Mayday relay, Mayday relay, Mayday relay\"."],
+    ["On a Mayday call, say your name/call sign:", ["Three times","Once","Twice","Five times"], 0, ""],
+    ["You acknowledge receipt of a Distress Signal by saying:", ["Mayday received","Roger that","Received Mayday","Acknowledge Mayday"], 2, "\"Moondrift, this is Windsong, RECEIVED MAYDAY.\""],
+    ["A responding vessel on the scene would:", ["Advise the Coast Guard of actions taken","Cancel the Distress Call and render aid","Impose radio silence with a Seelonce Mayday call","Wait until the Coast Guard turns control to that boat"], 0, "Keep the people coordinating the rescue informed."]
+  ]
+},
+{
+  id: "s7", short: "7 · Urgency", title: "Urgency: PAN PAN",
+  teach: `
+  <p><b>Urgency</b> is an important message about the safety of a ship or a person when the danger isn't grave and imminent. Examples are a dismasting, a disabled engine near a shipping lane, or a medical problem that needs advice.</p>
+  <div class="script"><span class="lbl">Urgency call and message</span>PAN PAN, PAN PAN, PAN PAN
+All stations, all stations, all stations
+this is Moondrift, Moondrift, Moondrift
+Engine failure, drifting, position 1 mile north of Point Grey
+Request a tow
+over</div>
+  <ul>
+    <li>Say <b>Pan Pan three times</b> and your identifier <b>three times</b>.</li>
+    <li>With DSC, the Urgency Alert goes out on <b>Channel 70</b>, then you speak on 16. The message may go with the call.</li>
+    <li>You can address it to <b>one station or all stations</b>.</li>
+    <li>It takes precedence over everything <b>except distress</b>.</li>
+    <li>If you hear one, keep listening for <b>at least 3 minutes</b>.</li>
+    <li>When it's resolved, <b>cancel it to all stations</b> if you sent it to all stations.</li>
+  </ul>`,
+  qs: [
+    ["It is proper to include the Urgency message with the call.", ["True","False"], 0, "Like distress, the urgency call and message can go together on 16."],
+    ["On an Urgency call, say your station identifier:", ["Twice","Once","Three times","Five times"], 2, ""],
+    ["Urgency means:", ["A very important message concerning a weather hazard","Important message concerning the safety of a ship, or the safety of a person","Grave, imminent danger","Message concerns danger or hazard to navigation"], 1, "Weather and navigation hazards are Sécurité. Grave and imminent danger is Mayday."],
+    ["When using DSC to transmit an Urgency Alert, on which channel will it be transmitted?", ["Channel 16","Channel 06","A working channel","Channel 70"], 3, "All DSC alerts go on 70."],
+    ["The signal that indicates Urgency is:", ["Pan Pan","Mayday","Sécurité","Urgency"], 0, "Said \"pahn pahn\", from the French panne (breakdown)."],
+    ["You must continue to listen after an Urgency Signal:", ["For at least 3 minutes","For at least 10 minutes","For at least 5 minutes","Until you hear an ‘urgency over’ message"], 0, ""],
+    ["The Urgency Signal should be repeated:", ["As often as you think is proper","Only once","Both at the beginning and end of the call","Three times"], 3, ""],
+    ["Urgency transmission take precedence over all except:", ["Weather advisories","Safety transmissions","Distress transmissions","Coast Guard advisories"], 2, ""],
+    ["An Urgency Signal:", ["Must be considered as addressed to all stations","Must be sent only to the Coast Guard","May be addressed to one station or all stations","Must be addressed to a specific station"], 2, ""],
+    ["If an Urgency–All Stations is over, send:", ["A call to All Stations cancelling the Urgency","A call to those who actually answered","No call needs to be sent","A call advising the Coast Guard you are cancelling the Urgency"], 0, "Everyone who heard it needs to know it's over."]
+  ]
+},
+{
+  id: "s8", short: "8 · Safety", title: "Safety: SÉCURITÉ",
+  teach: `
+  <p><b>Safety</b> calls warn others about navigation or weather hazards. Examples are a deadhead log in the channel, an unlit buoy, or a large vessel about to manoeuvre in a narrow channel.</p>
+  <div class="script"><span class="lbl">Safety call on Ch 16</span>SÉCURITÉ, SÉCURITÉ, SÉCURITÉ
+All stations, all stations, all stations
+this is Moondrift, Moondrift, Moondrift
+Navigational warning, listen Channel 06</div>
+  <div class="script"><span class="lbl">Then the message on Ch 06</span>SÉCURITÉ, SÉCURITÉ, SÉCURITÉ
+All stations ... this is Moondrift ...
+Deadhead log, half a mile southwest of Point Atkinson, a hazard to small craft
+Moondrift, out</div>
+  <ul>
+    <li><b>Sécurité three times</b>, addressed to <b>all stations</b>.</li>
+    <li>Make the call on <b>Channel 16</b> and send the message on <b>Channel 06</b>, the inter-ship safety channel, or another suitable working channel.</li>
+    <li>You can send it <b>any time the channel is clear</b>. It ranks after distress and urgency.</li>
+    <li>Use DSC for a safety alert only if the message matters <b>beyond a very local area</b>.</li>
+    <li>Call and message can go in <b>one transmission on 16</b> when a vessel warns others that it may impede navigation.</li>
+    <li>If you hear one, switch to the working channel and decide whether it concerns you. If you have questions, ask the <b>vessel that sent it</b>.</li>
+  </ul>`,
+  qs: [
+    ["All stations that receive a Safety Alert or Call shall shift to the working frequency and:", ["Determine if the Safety Alert or Call concerns them","Respond to every station responding to the Safety Alert or Call","Immediately call the vessel making the Safety Alert or Call on the working channel","Relay the Safety Call or Alert"], 0, ""],
+    ["If a vessel requires further information about a Safety message from another vessel it should first contact:", ["Any station relaying the Safety message","Any shore-based station which acknowledged the message","The Coast Guard","The vessel which transmitted the Safety message"], 3, "Go to the source."],
+    ["The Safety signal:", ["Precedes Continuous Marine Broadcast weather forecasts","Indicates help is required by a vessel in imminent danger","Precedes a navigational or weather warning","Is an alternate method of imposing Radio Silence"], 2, ""],
+    ["Safety Communications have priority over:", ["All except urgency communications","All other communications","All communications except distress and urgency","All except distress communications"], 2, "Third on the ladder."],
+    ["Safety messages should normally be transmitted on Channel 06 which is designated as:", ["A ship to shore frequency","An inter-ship Safety frequency","Public Correspondence frequency","A Coast Guard frequency"], 1, ""],
+    ["DSC may be used for a Safety call:", ["If it will be followed by a Distress voice call","Only if followed by a Routine call","If it must have precedence over all other transmissions","Only if applicable beyond a very local sea area"], 3, "Don't set off DSC alarms across a wide area for a local issue."],
+    ["What word is used to indicate that a voice safety call is being made?", ["Pan Pan","Safety","Sécurité","Caution"], 2, "Said \"say-cure-ee-tay\"."],
+    ["On what VHF channel would you make a Voice Safety call?", ["Channel 11","Channel 16","Channel 06","A Coast Guard working channel"], 1, "The call goes on 16. The message goes on 06."],
+    ["The Safety call and message may be sent in one transmission on the distress and calling channel:", ["Only by a shore based station","By any vessel whenever entering or leaving any harbour or anchorage","By a Coast Guard vessel engaged in aiding a vessel in distress","By a vessel to warn other vessels that it may impede navigation"], 3, "Everyone listening on 16 hears it at once."],
+    ["Safety Alerts or calls are generally addressed to:", ["Any stations you hear on the frequency you are monitoring","A Coast Guard station","A specific station","All stations"], 3, ""],
+    ["The safety message is sent on:", ["A suitable inter-ship safety channel","Any Coast Guard frequency","Channel 16","Channel 70"], 0, "Usually Channel 06."],
+    ["When transmitting a voice Safety call the word Sécurité is to be repeated:", ["Twice","Once","Three times","As required"], 2, "All three priority signals are said three times."],
+    ["When may Safety calls be transmitted on a VHF radio?", ["On the hour or half hour","At the end of the first available silence period on frequency 2182 kHz","Whenever a Coast Guard channel is clear","At any time the channel is clear"], 3, ""]
+  ]
+}
+];
+
+const ALPHA = ["Alfa","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel","India","Juliett","Kilo","Lima","Mike","November","Oscar","Papa","Quebec","Romeo","Sierra","Tango","Uniform","Victor","Whiskey","X-ray","Yankee","Zulu"];
+const ALIASES = { alpha: "alfa", juliet: "juliett", whisky: "whiskey", xray: "x-ray" };
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+const answers = store.get("rocm-answers", {});
+
+function esc(s) { return s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])); }
+
+const main = document.getElementById("lessons");
+const index = document.getElementById("index");
+
+index.insertAdjacentHTML("beforeend", `<a href="#alphabet">A–Z</a>`);
+
+LESSONS.forEach((L, li) => {
+  const sec = document.createElement("section");
+  sec.className = "lesson";
+  sec.id = L.id;
+  sec.innerHTML = `
+    <div class="lesson-head">
+      <div class="eyebrow">Lesson ${li + 1} of ${LESSONS.length}</div>
+      <h2>${L.title}</h2>
+    </div>
+    <div class="teach">${L.teach}</div>
+    <div class="quiz">
+      <div class="quiz-bar">
+        <h3>Section ${li + 1} review</h3>
+        <div class="row"><span class="score" id="score-${L.id}"></span><button class="btn" type="button" data-reset="${L.id}">Retry</button></div>
+      </div>
+      ${L.qs.map((q, qi) => `
+        <div class="q" data-l="${L.id}" data-q="${qi}">
+          <div class="q-text"><span class="q-num">${qi + 1}.</span><span>${esc(q[0])}</span></div>
+          <div class="opts">${q[1].map((o, oi) => `<button class="opt" type="button" id="${L.id}-${qi}-${oi}" data-o="${oi}"><span class="l">${q[1].length === 2 ? "" : "ABCDE"[oi]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+          <div class="why" hidden></div>
+        </div>`).join("")}
+    </div>`;
+  main.appendChild(sec);
+  index.insertAdjacentHTML("beforeend", `<a href="#${L.id}" id="nav-${L.id}">${L.short} <span class="sc" id="navsc-${L.id}"></span></a>`);
+});
+
+function paintQ(el) {
+  const lid = el.dataset.l, qi = +el.dataset.q;
+  const q = LESSONS.find(l => l.id === lid).qs[qi];
+  const picked = answers[lid]?.[qi];
+  const opts = el.querySelectorAll(".opt");
+  const why = el.querySelector(".why");
+  opts.forEach((b, oi) => {
+    b.classList.remove("right", "wrong");
+    b.disabled = picked !== undefined;
+    if (picked !== undefined) {
+      if (oi === q[2]) b.classList.add("right");
+      else if (oi === picked) b.classList.add("wrong");
+    }
+  });
+  if (picked === undefined) { why.hidden = true; return; }
+  const ok = picked === q[2];
+  why.hidden = false;
+  why.classList.toggle("miss", !ok);
+  why.innerHTML = `<strong>${ok ? "Correct." : "Answer: " + esc(q[1][q[2]]) + "."}</strong> ${esc(q[3])}`;
+}
+
+function paintScore(lid) {
+  const L = LESSONS.find(l => l.id === lid);
+  const a = answers[lid] || {};
+  const done = Object.keys(a).length;
+  const right = Object.entries(a).filter(([qi, o]) => L.qs[qi][2] === o).length;
+  document.getElementById("score-" + lid).textContent = `${right}/${L.qs.length} correct · ${done} answered`;
+  document.getElementById("navsc-" + lid).textContent = done ? `${right}/${L.qs.length}` : "";
+  document.getElementById("nav-" + lid).classList.toggle("done", done === L.qs.length && right === L.qs.length);
+}
+
+main.addEventListener("click", e => {
+  const opt = e.target.closest(".opt");
+  if (opt && !opt.disabled) {
+    const q = opt.closest(".q");
+    const lid = q.dataset.l;
+    (answers[lid] ||= {})[q.dataset.q] = +opt.dataset.o;
+    store.set("rocm-answers", answers);
+    paintQ(q); paintScore(lid);
+    return;
+  }
+  const reset = e.target.closest("[data-reset]");
+  if (reset) {
+    const lid = reset.dataset.reset;
+    delete answers[lid];
+    store.set("rocm-answers", answers);
+    document.querySelectorAll(`.q[data-l="${lid}"]`).forEach(paintQ);
+    paintScore(lid);
+  }
+});
+
+document.querySelectorAll(".q").forEach(paintQ);
+LESSONS.forEach(L => paintScore(L.id));
+
+// Phonetic alphabet practice
+const alphaEl = document.getElementById("alpha");
+const alphaSaved = store.get("rocm-alpha", {});
+alphaEl.innerHTML = ALPHA.map((w, i) => {
+  const L = String.fromCharCode(65 + i);
+  return `<label class="cell" id="cell-${L}"><span class="letter">${L}</span><input id="alpha-${L}" autocomplete="off" autocapitalize="words" spellcheck="false" aria-label="Phonetic word for ${L}" value="${esc(alphaSaved[L] || "")}"><span class="ans" hidden></span></label>`;
+}).join("");
+const norm = s => { const t = s.trim().toLowerCase().replace(/\s+/g, ""); return ALIASES[t] || t; };
+function checkAlpha(reveal) {
+  let right = 0;
+  ALPHA.forEach((w, i) => {
+    const L = String.fromCharCode(65 + i);
+    const cell = document.getElementById("cell-" + L);
+    const inp = document.getElementById("alpha-" + L);
+    const ans = cell.querySelector(".ans");
+    if (reveal) inp.value = w;
+    const ok = norm(inp.value) === norm(w);
+    if (ok) right++;
+    cell.classList.toggle("ok", ok);
+    cell.classList.toggle("no", !ok);
+    ans.hidden = ok;
+    ans.textContent = w;
+  });
+  document.getElementById("alpha-score").textContent = `${right}/26 correct`;
+}
+alphaEl.addEventListener("input", e => {
+  const L = e.target.id.slice(6);
+  alphaSaved[L] = e.target.value;
+  store.set("rocm-alpha", alphaSaved);
+  const cell = document.getElementById("cell-" + L);
+  cell.classList.remove("ok", "no");
+  cell.querySelector(".ans").hidden = true;
+});
+document.getElementById("alpha-check").addEventListener("click", () => checkAlpha(false));
+document.getElementById("alpha-reveal").addEventListener("click", () => checkAlpha(true));
+document.getElementById("alpha-clear").addEventListener("click", () => {
+  ALPHA.forEach((w, i) => {
+    const L = String.fromCharCode(65 + i);
+    document.getElementById("alpha-" + L).value = "";
+    const cell = document.getElementById("cell-" + L);
+    cell.classList.remove("ok", "no");
+    cell.querySelector(".ans").hidden = true;
+  });
+  for (const k in alphaSaved) delete alphaSaved[k];
+  store.set("rocm-alpha", alphaSaved);
+  document.getElementById("alpha-score").textContent = "";
+});
+</script>
+
+</body></html>
