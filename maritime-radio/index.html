@@ -103,6 +103,59 @@ a { color: var(--sea); }
 .day span { min-width: 0; }
 .course-day b { color: var(--accent); }
 
+/* Diagrams */
+.fig { margin: 0; display: grid; gap: 8px; }
+.fig figcaption { font-size: 14px; color: var(--muted); }
+.fig .scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--bg); padding: 12px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig svg.wide { min-width: 600px; }
+.swipe { display: none; font-weight: 700; color: var(--brand); }
+@media (max-width: 640px) { .swipe { display: inline; } }
+.fig svg text { font-family: var(--font-body); }
+.fig svg text.mono { font-family: var(--font-mono); }
+.p-surface { fill: var(--surface); } .p-bg { fill: var(--bg); } .p-brand { fill: var(--brand); }
+.p-rule { fill: var(--rule); } .p-sea { fill: var(--sea-soft); } .p-bad { fill: var(--bad); } .p-badsoft { fill: var(--bad-soft); }
+.s-ink { stroke: var(--ink); } .s-rule { stroke: var(--rule); } .s-muted { stroke: var(--muted); }
+.s-bad { stroke: var(--bad); } .s-brand { stroke: var(--brand); } .s-sea { stroke: var(--sea); }
+.t-ink { fill: var(--ink); } .t-muted { fill: var(--muted); } .t-brand { fill: var(--brand); } .t-bg { fill: var(--bg); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg div { display: grid; gap: 2px; text-align: center; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; min-width: 76px; }
+.seg b { font-family: var(--font-mono); font-weight: 500; font-size: 28px; line-height: 1.1; color: var(--brand); }
+.seg span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.seg.small b { font-size: 20px; }
+.seg .ghost { background: transparent; border-style: dashed; }
+.seg .ghost b { color: var(--muted); }
+.areas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+.areas div { background: color-mix(in srgb, var(--brand) var(--t), var(--bg)); border: 1px solid var(--rule); border-radius: 6px; padding: 12px; display: grid; gap: 4px; align-content: start; }
+.areas b { font-weight: 900; font-size: 24px; color: var(--brand); }
+.areas span { font-size: 14px; }
+@media (max-width: 560px) { .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; counter-reset: step; }
+.flow li { counter-increment: step; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; display: grid; gap: 4px; align-content: start; font-size: 14px; }
+.flow li::before { content: "Step " counter(step); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.flow .ch { font-family: var(--font-mono); font-weight: 500; color: var(--brand); }
+.say { border: 1px solid var(--rule); background: var(--bg); color: var(--brand); border-radius: 4px; padding: 5px 6px; cursor: pointer; line-height: 0; }
+.say:hover { border-color: var(--brand); }
+.hear { justify-self: start; display: inline-flex; gap: 8px; align-items: center; }
+
+/* Pages */
+.progress { height: 3px; background: var(--rule); }
+.progress span { display: block; height: 100%; width: 0; background: var(--brand); }
+@media (prefers-reduced-motion: no-preference) { .progress span { transition: width 0.3s; } }
+.index a.current { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.index a.current .sc { color: var(--on-brand); }
+.pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 36px 0; }
+.pager a { display: grid; gap: 2px; min-width: 0; max-width: 48%; padding: 12px 16px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 700; }
+.pager a small { font-size: 12px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.pager a.next { margin-left: auto; text-align: right; background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+.pager a.next small { color: var(--on-brand); opacity: 0.85; }
+.pager a:hover { border-color: var(--brand); }
+.summary { display: grid; gap: 4px; }
+.sum-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); color: var(--ink); text-decoration: none; }
+.sum-row span { min-width: 0; }
+.sum-row b { font-family: var(--font-mono); font-weight: 500; color: var(--muted); white-space: nowrap; }
+.sum-row.full b { color: var(--good); }
+
 /* Sticky index */
 .index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
@@ -184,7 +237,7 @@ td:first-child { font-family: var(--font-mono); font-weight: 500; white-space: n
 
 /* Phonetic */
 .alpha { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
-.cell { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; display: grid; grid-template-columns: 1.6em 1fr; align-items: center; gap: 8px; }
+.cell { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; display: grid; grid-template-columns: 1.6em minmax(0, 1fr) auto; align-items: center; gap: 8px; }
 .cell .letter { font-family: var(--font-display); font-weight: 700; font-size: 26px; text-align: center; }
 .cell input {
   width: 100%; min-width: 0; font: 400 15px var(--font-body); color: var(--ink); background: var(--bg);
@@ -192,7 +245,7 @@ td:first-child { font-family: var(--font-mono); font-weight: 500; white-space: n
 }
 .cell.ok { border-color: var(--good); background: var(--good-soft); }
 .cell.no { border-color: var(--bad); background: var(--bad-soft); }
-.cell .ans { grid-column: 2; font-size: 13px; color: var(--bad); }
+.cell .ans { grid-column: 2 / 4; font-size: 13px; color: var(--bad); }
 .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .numbers { display: flex; flex-wrap: wrap; gap: 6px; }
 .numbers span { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 4px 10px; font-size: 14px; }
@@ -215,7 +268,14 @@ footer { padding-block: 48px 64px; color: var(--muted); font-size: 14px; }
   </div>
 </div>
 
-<header class="wrap hero">
+<nav class="index" aria-label="Lessons">
+  <div class="wrap" id="index"></div>
+  <div class="progress"><span id="progress-bar"></span></div>
+</nav>
+
+<main class="wrap" id="lessons">
+<section class="page" id="welcome">
+<header class="hero">
   <div class="eyebrow">MacSailing · Maritime Radio Course</div>
   <h1>Welcome aboard the radio course.</h1>
   <p class="lede">This guide gets you ready for the Restricted Operator Certificate (Maritime), the ROC(M). Each lesson is short. Read it, then answer the review questions from your course package right underneath. You'll see straight away whether you were right and why.</p>
@@ -242,7 +302,7 @@ footer { padding-block: 48px 64px; color: var(--muted); font-size: 14px; }
   </div>
 </header>
 
-<div class="wrap prose">
+<div class="prose">
   <h2>What this course is</h2>
   <p>Anyone who transmits on a marine VHF radio in Canada needs an ROC(M). Innovation, Science and Economic Development Canada (ISED) issues it. Most recreational boaters earn it through a course like this one and a short exam with an accredited examiner. Learning the DSC (Digital Selective Calling) material earns the DSC endorsement, which you need to use the digital features of a modern radio.</p>
   <p>The course covers three things. First, the rules that come with the radio. Second, how to talk on it so you're understood on a busy channel. Third, what to do when things go wrong: the Distress, Urgency and Safety calls that could save your boat or someone else's.</p>
@@ -252,19 +312,16 @@ footer { padding-block: 48px 64px; color: var(--muted); font-size: 14px; }
     <li>Read each lesson's short notes before trying its questions.</li>
     <li>Pick an answer. Green means right; red shows you the correct one and the reason.</li>
     <li>Use <em>Retry</em> on any section until you score it cleanly. Your scores stay in this browser.</li>
+    <li>Move through the guide with <em>Next</em> and <em>Back</em> at the bottom of each page, or jump to any lesson from the bar at the top.</li>
   </ol>
   <div class="key">
     <h3>Before class</h3>
     <p>Use this prep guide to get familiar with the material. Don't worry if you don't have time to finish it all. We'll review everything in class before the exam.</p>
   </div>
 </div>
+</section>
 
-<nav class="index" aria-label="Lessons">
-  <div class="wrap" id="index"></div>
-</nav>
-
-<main class="wrap" id="lessons">
-  <section class="lesson" id="alphabet">
+  <section class="lesson page" id="alphabet">
     <div class="lesson-head">
       <div class="eyebrow">Warm-up</div>
       <h2>The phonetic alphabet</h2>
@@ -276,7 +333,7 @@ footer { padding-block: 48px 64px; color: var(--muted); font-size: 14px; }
         <span><b>0</b>Zero</span><span><b>1</b>Wun</span><span><b>2</b>Too</span><span><b>3</b>Tree</span><span><b>4</b>Fow-er</span>
         <span><b>5</b>Fife</span><span><b>6</b>Six</span><span><b>7</b>Sev-en</span><span><b>8</b>Ait</span><span><b>9</b>Nin-er</span>
       </div>
-      <div class="key"><h3>Practice</h3><p>Type the word for each letter, then press <em>Check</em>. Spelling isn't strict: "Alpha" and "Alfa", "Juliet" and "Juliett", "Xray" and "X-ray" all count.</p></div>
+      <div class="key"><h3>Practice</h3><p>Tap the speaker to hear a word. Type the word for each letter, then press <em>Check</em>. Spelling isn't strict: "Alpha" and "Alfa", "Juliet" and "Juliett", "Xray" and "X-ray" all count.</p></div>
     </div>
     <div class="alpha" id="alpha"></div>
     <div class="row">
@@ -288,8 +345,10 @@ footer { padding-block: 48px 64px; color: var(--muted); font-size: 14px; }
   </section>
 </main>
 
+<nav class="wrap pager" id="pager" aria-label="Back and next"></nav>
+
 <footer class="wrap">
-  <p>Built from the MacSailing Maritime Radio Course Review Package. If a regulation in your course book differs from this guide, your course book and your instructor are the authority.</p>
+  <p>MacSailing · Maritime Radio Course prep guide. Questions about the course? Ask us in class or contact the MacSailing office.</p>
 </footer>
 
 <script>
@@ -307,7 +366,25 @@ const LESSONS = [
     <li><b>Handhelds</b> are for when a fixed radio is impractical. They aren't a substitute for a fixed set where one fits.</li>
     <li><b>Radio logs</b> are required only on <b>compulsorily fitted</b> vessels, such as commercial ships required by law to carry a radio.</li>
     <li><b>Penalties</b> are handled under the federal <b>Contraventions Act</b> in most provinces and territories, which allows ticketing.</li>
-  </ul>`,
+  </ul>
+  <figure class="fig">
+    <div class="scroll"><svg class="wide" viewBox="0 0 640 240" role="img" aria-label="Two sailboats with masthead antennas talk over the horizon; a handheld at deck level is blocked by the curve of the earth">
+      <path d="M0 210 Q320 130 640 210 L640 240 L0 240 Z" class="p-sea s-sea" stroke-width="2"/>
+      <line x1="70" y1="70" x2="570" y2="70" class="s-brand" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <text x="320" y="56" class="t-ink" font-size="15" text-anchor="middle">Masthead antenna: the signal clears the horizon</text>
+      <line x1="70" y1="178" x2="250" y2="172" class="s-muted" stroke-width="2" stroke-dasharray="4 4"/>
+      <path d="M242 164 L258 180 M258 164 L242 180" class="s-bad" stroke-width="2.5" fill="none"/>
+      <text x="90" y="150" class="t-muted" font-size="14">Handheld at deck level: blocked by the curve of the earth</text>
+      <line x1="70" y1="194" x2="70" y2="70" class="s-ink" stroke-width="2"/>
+      <path d="M46 194 L94 194 L87 204 L53 204 Z" class="p-brand"/>
+      <circle cx="70" cy="70" r="5" class="p-brand"/>
+      <line x1="570" y1="194" x2="570" y2="70" class="s-ink" stroke-width="2"/>
+      <path d="M546 194 L594 194 L587 204 L553 204 Z" class="p-brand"/>
+      <circle cx="570" cy="70" r="5" class="p-brand"/>
+      <text x="320" y="228" class="t-brand" font-size="15" font-weight="700" text-anchor="middle">About 20 NM reliable range</text>
+    </svg></div>
+    <figcaption><span class="swipe">Swipe to see the whole diagram. </span>VHF travels in straight lines. The higher your antenna, the farther you can reach.</figcaption>
+  </figure>`,
   qs: [
     ["Your ROC(M) or a copy must be:", ["Posted in a conspicuous area near the transmitter","With you when operating a radio","On file with the boat's owner","Filed with the Coast Guard"], 1, "The certificate belongs to the person, not the boat, so it travels with you."],
     ["The VHF band provides a reliable communications range up to approximately:", ["20 NM","75 NM","5 NM","50 NM"], 0, "VHF is line of sight. Antenna height matters, but about 20 NM is the reliable figure."],
@@ -353,13 +430,22 @@ const LESSONS = [
     <li>Your <b>station identifier</b> can be your call sign, your boat name or your own name.</li>
     <li>Ask the Coast Guard for a <b>radio check</b> on a working channel, never on 16.</li>
     <li><b>Profanity</b> is strictly prohibited and can cost up to $5,000 plus a year in jail. A <b>false distress</b> call is punishable by a fine and jail.</li>
-  </ul>`,
+  </ul>
+  <figure class="fig">
+    <div class="seg">
+      <div><b>20</b><span>Day</span></div>
+      <div><b>22</b><span>Hour</span></div>
+      <div><b>15</b><span>Minute</span></div>
+      <div class="ghost"><b>Z</b><span>Only if UTC</span></div>
+    </div>
+    <figcaption>Reading a date-time group: 10:15 PM local time on the 20th is written 202215. Add Z only when the time is UTC.</figcaption>
+  </figure>`,
   qs: [
     ["Use of profane or obscene language:", ["Is strictly prohibited","Is frowned upon","Is not permitted but is not punishable","Will be allowed if under stress"], 0, "Prohibited, and punishable."],
     ["AFFIRMATIVE means:", ["Your message is received","Please confirm","You may continue to send","Yes or permission granted"], 3, "\"Message received\" is ROGER. AFFIRMATIVE is \"yes\"."],
     ["What does GO AHEAD mean?", ["Proceed with your message","Show me the way","You may pass me","I will follow your boat"], 0, "Prowords are about the conversation, not navigation."],
     ["When calling the Coast Guard for a radio check you should use a working channel.", ["True","False"], 0, "Keep Channel 16 clear for calling and emergencies."],
-    ["What is the correct way to express noon on the 16th day of the month EST?", ["120016","161200E","161200Z","161200"], 3, "DDHHMM: day 16, time 1200. EST is local time, so there's no zone letter. Z would mean UTC. Check this one with your instructor, as some materials write local zones with a letter."],
+    ["What is the correct way to express noon on the 16th day of the month EST?", ["120016","161200E","161200Z","161200"], 3, "DDHHMM: day 16, time 1200. EST is local time, so there's no zone letter. Z would mean UTC."],
     ["The penalty for use of profane or obscene language on a recreational vessel could be as much as:", ["$5000 and costs and a year in jail","As much as the judge chooses","$10000 costs and a year in jail","Forfeiture of your boat"], 0, "The individual maximum is $5,000 and up to a year in jail."],
     ["Between two ship stations, the station being called is the controlling station.", ["True","False"], 0, "The called station controls. It can pick the working channel and end the exchange."],
     ["Your vessel's identifier is used when calling other vessels. It may be:", ["Your name","The call sign issued with your radio station licence","Your boat name","Any of the above"], 3, "Without a licence and call sign, a boat name or your name is acceptable."],
@@ -386,7 +472,33 @@ const LESSONS = [
     <li>An <b>MMSI</b> (Maritime Mobile Service Identity) is a nine-digit number, a phone number for your radio. You get it <b>free from ISED</b>, and it <b>must be programmed into the radio</b>, since it doesn't come from the factory.</li>
     <li>The first three non-zero digits are the <b>country code</b> (Canada is 316). A leading zero means a <b>fleet/group</b> number, and two leading zeros mean a <b>shore station</b>.</li>
     <li>A GPS connected to the radio provides <b>automatic position information</b> in your alerts.</li>
-  </ul>`,
+  </ul>
+  <figure class="fig">
+    <div class="areas">
+      <div style="--t:16%"><b>A1</b><span>In range of a Coast Guard VHF-DSC shore station</span></div>
+      <div style="--t:11%"><b>A2</b><span>In range of an MF-DSC shore station</span></div>
+      <div style="--t:6%"><b>A3</b><span>Covered by Inmarsat satellites</span></div>
+      <div style="--t:2%"><b>A4</b><span>Polar waters outside A1 to A3</span></div>
+    </div>
+    <figcaption>The four GMDSS sea areas, from the shore out. Coastal recreational boating is usually in Sea Area A1.</figcaption>
+  </figure>
+  <figure class="fig">
+    <div class="seg">
+      <div><b>316</b><span>Country · Canada</span></div>
+      <div><b>123456</b><span>Your vessel</span></div>
+    </div>
+    <div class="seg small">
+      <div><b>0</b><span>Group</span></div>
+      <div><b>316</b><span>Canada</span></div>
+      <div><b>12345</b><span>Fleet number</span></div>
+    </div>
+    <div class="seg small">
+      <div><b>00</b><span>Coast station</span></div>
+      <div><b>316</b><span>Canada</span></div>
+      <div><b>1234</b><span>Station number</span></div>
+    </div>
+    <figcaption>Every MMSI is nine digits. Leading zeros tell you what kind of station is calling.</figcaption>
+  </figure>`,
   qs: [
     ["GPS connected to your radio provides:", ["Your position, provided you have LORAN on board","Position information that is no more than 4 hours old","Automatic position information","Extended range for communications"], 2, "The radio reads your position from the GPS and sends it with DSC calls."],
     ["An MMSI number is:", ["A number you obtain from Innovation, Science and Economic Development Canada (IC)","A number issued by the Coast Guard","A nine digit number you must verbally state when transmitting DSC calls","A number that can be added to any VHF radio to enable you to receive Distress Calls on Channel 70"], 0, "ISED issues it. You don't need to speak it on DSC calls, because the radio sends it digitally."],
@@ -409,6 +521,52 @@ const LESSONS = [
   id: "s4", short: "4 · DSC radios", title: "Digital Selective Calling radios",
   teach: `
   <p>A DSC radio sends a short digital burst on <b>Channel 70</b>: who you are (your MMSI), who you're calling, what kind of call it is and, in a distress, where you are.</p>
+  <figure class="fig">
+    <div class="scroll"><svg class="wide" viewBox="0 0 680 320" role="img" aria-label="Front panel of a fixed VHF-DSC radio and handset, with each control labelled">
+      <rect x="24" y="60" width="90" height="170" rx="40" class="p-surface s-ink" stroke-width="2"/>
+      <rect x="14" y="110" width="12" height="54" rx="4" class="p-brand"/>
+      <rect x="46" y="86" width="46" height="34" rx="6" class="p-rule"/>
+      <path d="M69 230 C80 270 130 270 150 240" class="s-ink" fill="none" stroke-width="2"/>
+      <rect x="150" y="50" width="510" height="200" rx="18" class="p-surface s-ink" stroke-width="2"/>
+      <rect x="180" y="78" width="220" height="112" rx="6" class="p-sea s-rule" stroke-width="1.5"/>
+      <text x="196" y="102" class="t-ink" font-size="14" font-weight="700">HI</text>
+      <text x="384" y="102" class="t-brand" font-size="14" font-weight="700" text-anchor="end">DSC</text>
+      <text x="290" y="168" class="t-ink mono" font-size="64" text-anchor="middle">16</text>
+      <text x="196" y="182" class="t-muted" font-size="12">CAN</text>
+      <rect x="180" y="204" width="60" height="30" rx="6" class="p-bg s-ink" stroke-width="1.5"/>
+      <text x="210" y="224" class="t-ink" font-size="14" font-weight="700" text-anchor="middle">16/9</text>
+      <rect x="250" y="204" width="60" height="30" rx="6" class="p-bg s-ink" stroke-width="1.5"/>
+      <text x="280" y="224" class="t-ink" font-size="14" font-weight="700" text-anchor="middle">H/L</text>
+      <rect x="320" y="204" width="80" height="30" rx="6" class="p-bg s-ink" stroke-width="1.5"/>
+      <text x="360" y="224" class="t-ink" font-size="14" font-weight="700" text-anchor="middle">CALL</text>
+      <circle cx="470" cy="108" r="26" class="p-bg s-ink" stroke-width="2"/>
+      <line x1="470" y1="86" x2="470" y2="100" class="s-ink" stroke-width="3"/>
+      <circle cx="560" cy="108" r="26" class="p-bg s-ink" stroke-width="2"/>
+      <line x1="560" y1="86" x2="560" y2="100" class="s-ink" stroke-width="3"/>
+      <text x="470" y="152" class="t-muted" font-size="12" text-anchor="middle">VOL</text>
+      <text x="560" y="152" class="t-muted" font-size="12" text-anchor="middle">SQL</text>
+      <rect x="440" y="176" width="190" height="58" rx="8" class="p-badsoft s-bad" stroke-width="2" stroke-dasharray="5 4"/>
+      <rect x="475" y="188" width="120" height="34" rx="6" class="p-bad"/>
+      <text x="535" y="210" class="t-bg" font-size="14" font-weight="700" text-anchor="middle">DISTRESS</text>
+      <g class="s-muted" stroke-width="1.2">
+        <line x1="20" y1="34" x2="20" y2="108"/>
+        <line x1="290" y1="34" x2="290" y2="78"/>
+        <line x1="515" y1="34" x2="515" y2="108"/>
+        <line x1="210" y1="234" x2="210" y2="268"/>
+        <line x1="360" y1="234" x2="360" y2="268"/>
+        <line x1="280" y1="234" x2="280" y2="294"/>
+        <line x1="535" y1="234" x2="535" y2="294"/>
+      </g>
+      <text x="14" y="28" class="t-ink" font-size="14">PTT: press to talk</text>
+      <text x="290" y="28" class="t-ink" font-size="14" text-anchor="middle">Display: channel, power, DSC</text>
+      <text x="515" y="28" class="t-ink" font-size="14" text-anchor="middle">Volume · Squelch</text>
+      <text x="210" y="284" class="t-ink" font-size="14" text-anchor="middle">16/9: jump to Ch 16</text>
+      <text x="360" y="284" class="t-ink" font-size="14" text-anchor="middle">DSC menu &amp; directory</text>
+      <text x="280" y="310" class="t-ink" font-size="14" text-anchor="middle">H/L: 25 W or 1 W</text>
+      <text x="535" y="310" class="t-ink" font-size="14" text-anchor="middle">DISTRESS: lift cover, hold 5 s</text>
+    </svg></div>
+    <figcaption><span class="swipe">Swipe to see the whole radio. </span>A typical fixed VHF-DSC radio. Button names vary by brand, but every Class D radio has these controls.</figcaption>
+  </figure>
   <ul>
     <li><b>Channel 70 is digital only.</b> Never talk on it, and your radio won't let you. Distress Alerts go out on 70 automatically.</li>
     <li><b>Class D</b> is the minimum standard for a recreational VHF-DSC radio. It's the primary GMDSS tool for recreational boaters.</li>
@@ -447,7 +605,16 @@ this is Moondrift, Moondrift, Moondrift
 Channel 68, over</div>
   <div class="key"><h3>Routine DSC call</h3>
     <p>You need the other boat's <b>MMSI</b>, which you can save in your radio's <b>Directory</b>. The <b>caller picks the working channel</b> and it's sent with the call. The other radio <b>sounds an alert</b>, both radios switch to that channel and you talk there. DSC can also <b>request another vessel's position</b>. After a <b>group call</b>, members reply on the selected working channel.</p>
-  </div>`,
+  </div>
+  <figure class="fig">
+    <ol class="flow">
+      <li><b class="ch">Your radio</b>Pick the contact from your Directory and choose a working channel</li>
+      <li><b class="ch">Ch 70</b>Your radio sends the call digitally</li>
+      <li><b class="ch">Their radio</b>It sounds an alert and switches to your working channel</li>
+      <li><b class="ch">Working channel</b>Talk by voice</li>
+    </ol>
+    <figcaption>How a routine DSC call works.</figcaption>
+  </figure>`,
   qs: [
     ["To have balanced calling, how many times should you state the call sign of your vessel?", ["Fewer times than the station being called was stated","More times that the station being called was stated","The same number of times that the station being called was stated","Three times"], 2, "Two and two, or three and three."],
     ["Which of the following is an example of how to begin a call in response to a voice call when you do not hear the caller's identification ?", ["Caller say again ...","Moondrift calling unknown station","Station calling Moondrift...","This is Moondrift say again..."], 2, "In full: \"Station calling Moondrift, this is Moondrift, say again.\""],
@@ -476,15 +643,25 @@ Channel 68, over</div>
     <div class="rung"><b>Routine</b><span>Everything else</span></div>
   </div>
   <p>With a DSC radio, lift the cover and hold the Distress button. Then send the voice call on <b>Channel 16</b>, with the call and message together.</p>
+  <figure class="fig">
+    <ol class="flow">
+      <li><b class="ch">DISTRESS button</b>Lift the cover and hold for about 5 seconds</li>
+      <li><b class="ch">Ch 70</b>The alert goes out with your MMSI and GPS position</li>
+      <li><b class="ch">Ch 16</b>Your radio switches over. Give your Mayday by voice</li>
+      <li><b class="ch">Coast Guard</b>Acknowledges and coordinates the rescue</li>
+    </ol>
+    <figcaption>What happens when you send a DSC distress alert.</figcaption>
+  </figure>
   <div class="script"><span class="lbl">Distress call and message</span>MAYDAY MAYDAY MAYDAY
 this is Moondrift, Moondrift, Moondrift   (call sign, MMSI)
 MAYDAY Moondrift
-Position: 2 miles south of Main Duck Island
+Position: 2 miles south of Entrance Island, off Nanaimo
 Nature: taking on water, sinking
 Assistance: need immediate help
 Persons on board: 4
 Other: 10-metre white sloop, abandoning to liferaft
 over</div>
+  <button class="btn hear" type="button" data-say="Mayday, Mayday, Mayday. This is Moondrift, Moondrift, Moondrift. Mayday, Moondrift. Position: two miles south of Entrance Island, off Nanaimo. Taking on water, sinking. Need immediate help. Four persons on board. Ten metre white sloop, abandoning to liferaft. Over."><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>Hear this call read aloud</button>
   <ul>
     <li>The <b>vessel in distress controls</b> the traffic unless it hands control to another station, usually the Coast Guard.</li>
     <li>To stop interference, the controlling station says <b>SEELONCE MAYDAY</b>. When it's over: <b>SEELONCE FEENEE</b>.</li>
@@ -517,7 +694,7 @@ over</div>
   <div class="script"><span class="lbl">Urgency call and message</span>PAN PAN, PAN PAN, PAN PAN
 All stations, all stations, all stations
 this is Moondrift, Moondrift, Moondrift
-Engine failure, drifting, position 1 mile east of Nine Mile Point
+Engine failure, drifting, position 1 mile north of Point Grey
 Request a tow
 over</div>
   <ul>
@@ -545,13 +722,21 @@ over</div>
   id: "s8", short: "8 · Safety", title: "Safety: SÉCURITÉ",
   teach: `
   <p><b>Safety</b> calls warn others about navigation or weather hazards. Examples are a deadhead log in the channel, an unlit buoy, or a large vessel about to manoeuvre in a narrow channel.</p>
+  <figure class="fig">
+    <ol class="flow">
+      <li><b class="ch">Ch 70 · if needed</b>DSC safety alert, only when it matters beyond your local area</li>
+      <li><b class="ch">Ch 16</b>Sécurité call: say what's coming and which channel to switch to</li>
+      <li><b class="ch">Ch 06</b>Give the message itself</li>
+    </ol>
+    <figcaption>A safety call uses two or three channels, in this order.</figcaption>
+  </figure>
   <div class="script"><span class="lbl">Safety call on Ch 16</span>SÉCURITÉ, SÉCURITÉ, SÉCURITÉ
 All stations, all stations, all stations
 this is Moondrift, Moondrift, Moondrift
 Navigational warning, listen Channel 06</div>
   <div class="script"><span class="lbl">Then the message on Ch 06</span>SÉCURITÉ, SÉCURITÉ, SÉCURITÉ
 All stations ... this is Moondrift ...
-Large floating log, half a mile west of Pigeon Island, a hazard to small craft
+Deadhead log, half a mile southwest of Point Atkinson, a hazard to small craft
 Moondrift, out</div>
   <ul>
     <li><b>Sécurité three times</b>, addressed to <b>all stations</b>.</li>
@@ -593,11 +778,11 @@ function esc(s) { return s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", 
 const main = document.getElementById("lessons");
 const index = document.getElementById("index");
 
-index.insertAdjacentHTML("beforeend", `<a href="#alphabet">A–Z</a>`);
+index.insertAdjacentHTML("beforeend", `<a href="#welcome">Welcome</a><a href="#alphabet">A–Z</a>`);
 
 LESSONS.forEach((L, li) => {
   const sec = document.createElement("section");
-  sec.className = "lesson";
+  sec.className = "lesson page";
   sec.id = L.id;
   sec.innerHTML = `
     <div class="lesson-head">
@@ -620,6 +805,35 @@ LESSONS.forEach((L, li) => {
   main.appendChild(sec);
   index.insertAdjacentHTML("beforeend", `<a href="#${L.id}" id="nav-${L.id}">${L.short} <span class="sc" id="navsc-${L.id}"></span></a>`);
 });
+
+const fin = document.createElement("section");
+fin.className = "lesson page";
+fin.id = "finish";
+fin.innerHTML = `
+  <div class="lesson-head">
+    <div class="eyebrow">All done</div>
+    <h2>Ready for class</h2>
+  </div>
+  <div class="teach"><p>Here's how you did in each lesson. Don't worry about anything you missed. We'll go over all of it together in the review session, right before the exam.</p></div>
+  <div class="summary" id="summary"></div>`;
+main.appendChild(fin);
+index.insertAdjacentHTML("beforeend", `<a href="#finish">Finish</a>`);
+
+function stats(lid) {
+  const L = LESSONS.find(l => l.id === lid);
+  const a = answers[lid] || {};
+  const done = Object.keys(a).length;
+  const right = Object.entries(a).filter(([qi, o]) => L.qs[qi][2] === o).length;
+  return { n: L.qs.length, done, right };
+}
+
+function renderFinish() {
+  document.getElementById("summary").innerHTML = LESSONS.map((L, i) => {
+    const s = stats(L.id);
+    const label = s.done === 0 ? "Not started" : `${s.right}/${s.n} correct`;
+    return `<a class="sum-row${s.right === s.n ? " full" : ""}" href="#${L.id}"><span>Lesson ${i + 1} · ${esc(L.title)}</span><b>${label}</b></a>`;
+  }).join("");
+}
 
 function paintQ(el) {
   const lid = el.dataset.l, qi = +el.dataset.q;
@@ -644,9 +858,7 @@ function paintQ(el) {
 
 function paintScore(lid) {
   const L = LESSONS.find(l => l.id === lid);
-  const a = answers[lid] || {};
-  const done = Object.keys(a).length;
-  const right = Object.entries(a).filter(([qi, o]) => L.qs[qi][2] === o).length;
+  const { done, right } = stats(lid);
   document.getElementById("score-" + lid).textContent = `${right}/${L.qs.length} correct · ${done} answered`;
   document.getElementById("navsc-" + lid).textContent = done ? `${right}/${L.qs.length}` : "";
   document.getElementById("nav-" + lid).classList.toggle("done", done === L.qs.length && right === L.qs.length);
@@ -680,7 +892,7 @@ const alphaEl = document.getElementById("alpha");
 const alphaSaved = store.get("rocm-alpha", {});
 alphaEl.innerHTML = ALPHA.map((w, i) => {
   const L = String.fromCharCode(65 + i);
-  return `<label class="cell" id="cell-${L}"><span class="letter">${L}</span><input id="alpha-${L}" autocomplete="off" autocapitalize="words" spellcheck="false" aria-label="Phonetic word for ${L}" value="${esc(alphaSaved[L] || "")}"><span class="ans" hidden></span></label>`;
+  return `<label class="cell" id="cell-${L}"><span class="letter">${L}</span><input id="alpha-${L}" autocomplete="off" autocapitalize="words" spellcheck="false" aria-label="Phonetic word for ${L}" value="${esc(alphaSaved[L] || "")}"><button class="say" type="button" data-say="${w}" aria-label="Hear ${w}"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg></button><span class="ans" hidden></span></label>`;
 }).join("");
 const norm = s => { const t = s.trim().toLowerCase().replace(/\s+/g, ""); return ALIASES[t] || t; };
 function checkAlpha(reveal) {
@@ -722,6 +934,49 @@ document.getElementById("alpha-clear").addEventListener("click", () => {
   store.set("rocm-alpha", alphaSaved);
   document.getElementById("alpha-score").textContent = "";
 });
+
+// Read aloud with the browser's built-in voice
+const canSpeak = "speechSynthesis" in window;
+document.querySelectorAll("[data-say]").forEach(b => { b.hidden = !canSpeak; });
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-say]");
+  if (!b || !canSpeak) return;
+  e.preventDefault();
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(b.dataset.say);
+  u.lang = "en-CA";
+  u.rate = 0.9;
+  speechSynthesis.speak(u);
+});
+
+// One page at a time
+const PAGES = [{ id: "welcome", t: "Welcome" }, { id: "alphabet", t: "Phonetic alphabet" }]
+  .concat(LESSONS.map((L, i) => ({ id: L.id, t: `Lesson ${i + 1} · ${L.title}` })), [{ id: "finish", t: "Ready for class" }]);
+const pager = document.getElementById("pager");
+function show(id) {
+  let i = PAGES.findIndex(p => p.id === id);
+  if (i < 0) i = 0;
+  const cur = PAGES[i];
+  document.querySelectorAll(".page").forEach(s => { s.hidden = s.id !== cur.id; });
+  index.querySelectorAll("a").forEach(a => {
+    const on = a.getAttribute("href") === "#" + cur.id;
+    a.classList.toggle("current", on);
+    if (on) {
+      a.setAttribute("aria-current", "page");
+      a.scrollIntoView({ block: "nearest", inline: "center" });
+    } else a.removeAttribute("aria-current");
+  });
+  document.getElementById("progress-bar").style.width = `${(i / (PAGES.length - 1)) * 100}%`;
+  const prev = PAGES[i - 1], next = PAGES[i + 1];
+  pager.innerHTML =
+    (prev ? `<a class="prev" href="#${prev.id}"><small>Back</small>${esc(prev.t)}</a>` : "") +
+    (next ? `<a class="next" href="#${next.id}"><small>Next</small>${esc(next.t)}</a>` : "");
+  document.title = i === 0 ? "ROC(M) Study Guide" : `${cur.t} · ROC(M) Study Guide`;
+  if (cur.id === "finish") renderFinish();
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+show(location.hash.slice(1));
 </script>
 </body>
 </html>
